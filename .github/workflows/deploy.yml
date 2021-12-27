@@ -17,16 +17,16 @@ jobs:
           cache: "npm"
 
       - name: Dependencies Install
-      - run: npm install
+        run: npm install
 
       - name: Build
-      - run: npm run build
+        run: npm run build
 
       - name: Export
-      - run: npm run export
+        run: npm run export
 
       - name: Generate .nojekyll
-      - run: touch out/.nojekyll
+        run: touch out/.nojekyll
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.7
