@@ -1,0 +1,1 @@
+self.__BUILD_MANIFEST={__rewrites:{beforeFiles:[],afterFiles:[{source:"/",destination:"/moka"}],fallback:[]},"/_error":["static/chunks/pages/_error-2280fa386d040b66.js"],"/[...pid]":["static/css/f9234d8ec807a85a.css","static/chunks/pages/[...pid]-60591d497d07b791.js"],sortedPages:["/_app","/_error","/[...pid]"]},self.__BUILD_MANIFEST_CB&&self.__BUILD_MANIFEST_CB();
