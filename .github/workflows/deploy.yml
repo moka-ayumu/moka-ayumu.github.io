@@ -10,14 +10,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node 16 & Cache
+      - name: Setup Node 16
         uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: "npm"
+
+      - name: Setup Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Dependencies Install
         run: npm install
+
+      - name: Opt-Out Telemetry
+        run: npx next telemetry disable
 
       - name: Build
         run: npm run build
