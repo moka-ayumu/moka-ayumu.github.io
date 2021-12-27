@@ -41,7 +41,7 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
-          brach: gh-pages
+          branch: gh-pages
           folder: out
           git-config-name: Build-Deploy Bot
           git-config-email: <>
