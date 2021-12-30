@@ -27,7 +27,8 @@
   padding: 1rem;
   @media (min-width: 90rem) {
     width: 90%;
-    height: 90%;
+    // height: 90%;
+    max-height: 90%;
   }
   @media (max-width: 90rem) {
     width: 100%;

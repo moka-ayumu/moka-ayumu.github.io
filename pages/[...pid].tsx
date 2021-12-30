@@ -7,8 +7,11 @@ import { useRouter } from "next/router";
 import Moka from "../pids/Moka";
 import ChumeWeb from "../pids/ChumeWeb";
 import BgCanvas from "../components/BgCanvas";
+import HoloP from "../pids/HoloP";
+import ERELIZA from "../pids/ER-ELIZA";
+import ChumeDebut from "../pids/ChumeDebut";
 
-const pids = ["moka", "ChumeWeb"];
+const pids = ["moka", "ChumeWeb", "ChumeDebut", "HoloP", "ER-ELIZA"];
 const Home: NextPage = () => {
   const router = useRouter();
   const { pid } = router.query;
@@ -132,6 +135,9 @@ const Home: NextPage = () => {
       <div className={styles.main}>
         <Moka nameRef={nameRef} />
         <ChumeWeb />
+        <ChumeDebut />
+        <HoloP />
+        <ERELIZA />
         <BgCanvas wheelDirection={wheelDirection} />
       </div>
       <nav className={styles.nav}>

@@ -17,7 +17,8 @@ const ChumeWeb: NextPage<{ title: string; sub: string; href?: string }> = ({
       lasttime: 0,
       anime: anime({
         targets: subData,
-        left: 34.5,
+        // left: 34.5,
+        left: 15,
         spacing: [0, 0.5, 0],
         easing: "easeOutSine",
         duration: 500,
