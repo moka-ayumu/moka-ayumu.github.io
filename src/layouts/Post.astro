@@ -18,7 +18,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified).format('YYYY-MM
     <p class="text-sm text-right">{lastModified}</p>
     <p class="text-sm text-right">약 {remarkPluginFrontmatter.readingTime.minutes}분</p>
   </div>
-  <div class="prose max-w-none">
+  <div class="prose max-w-6xl">
     <Content />
   </div>
   <Giscus />
