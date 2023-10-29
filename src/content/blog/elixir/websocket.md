@@ -24,7 +24,7 @@ Registry는 키-값 저장소로, 동일한 키를 여러가 가질 수 있는 :
 추후에 키를 사용하여 프로세스 PID를 가져와 메시지를 보내게 된다.
 
 ```elixir
-children # [
+children = [
     Registry.child_spec(keys: :duplicate, name: Registry.Test)
 ]
 Supervisor.start_link(children, [strategy: :one_for_one, name: Backend.Application])
@@ -55,23 +55,23 @@ keys에 원하는 키 설정과 name에 추후에 사용할 이름을 입력하�
 ```elixir
 
 defmodule Backend.SocketHandler do
-@behaviour :cowboy_websocket
+  @behaviour :cowboy_websocket
 
-def init(req, \_state) do # 들어온 HTTP 리퀘스트(req)를 필요한 단계를 거쳐 state로 변환후 반환 # ex. 채널명
-{:cowboy_websocket, req, state}
-end
+  def init(req, \_state) do # 들어온 HTTP 리퀘스트(req)를 필요한 단계를 거쳐 state로 변환후 반환 # ex. 채널명
+    {:cowboy_websocket, req, state}
+  end
 
-def websocket_init(state) do # 웹소켓 연결시 초기화 함수 (선택사항)
-{:ok, state} # doc에 있는 CallResult 형식에 따름
-end
+  def websocket_init(state) do # 웹소켓 연결시 초기화 함수 (선택사항)
+    {:ok, state} # doc에 있는 CallResult 형식에 따름
+  end
 
-def websocket_handle({:text, message}, state) do # Client가 웹소켓으로 메시지를 보냈을 때 호출되는 함수 # message: 전달된 텍스트 값, state: 현재 프로세스 state # 만약 전달된 값이 json 형식이라면 Jason 라이브러리와 같은 json 처리기를 사용
-{:reply, {:text, value}, state} # CallResult
-end
+  def websocket_handle({:text, message}, state) do # Client가 웹소켓으로 메시지를 보냈을 때 호출되는 함수 # message: 전달된 텍스트 값, state: 현재 프로세스 state # 만약 전달된 값이 json 형식이라면 Jason 라이브러리와 같은 json 처리기를 사용
+    {:reply, {:text, value}, state} # CallResult
+  end
 
-def websocket_info(info, state) do # 해당 프로세스로 Elixir내에서 Process.send 함수를 통해 메시지를 보냈을 때 호출되는 함수 # info: 전달된 값, state: 현재 프로세스 state
-{:reply, {:text, value}, state} # CallResult
-end
+  def websocket_info(info, state) do # 해당 프로세스로 Elixir내에서 Process.send 함수를 통해 메시지를 보냈을 때 호출되는 함수 # info: 전달된 값, state: 현재 프로세스 state
+    {:reply, {:text, value}, state} # CallResult
+  end
 end
 
 ```
