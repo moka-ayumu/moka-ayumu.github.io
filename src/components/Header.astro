@@ -1,0 +1,16 @@
+---
+import Menu from './Menu/Menu.astro';
+import ProfileHeader from './Profile/ProfileHeader.astro';
+---
+
+<input type="checkbox" class="hidden peer" id="menu" />
+<div class="p-2 flex gap-2 items-center">
+  <label class="flex md:hidden" for="menu"><span class="material-symbols-rounded">menu</span></label>
+  <ProfileHeader />
+</div>
+<div class="fixed w-screen h-screen hidden bg-slate-300 z-10 flex-col peer-checked:flex p-3 gap-3" id="menu">
+  <ProfileHeader>
+    <label for="menu" slot="tail" class="material-symbols-rounded">close</label>
+  </ProfileHeader>
+  <Menu />
+</div>

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import A from '../components/A.astro';
+import Panel from '../components/Panel.astro';
+import ProfileImage from '../components/Profile/ProfileImage.astro';
+import ProfileName from '../components/Profile/ProfileName.astro';
+---
+
+<Layout title="MOKA-AYUMU">
+  <main class="h-full flex">
+    <div class="flex flex-col m-auto gap-8">
+      <Panel class="grid grid-cols-[auto_1fr] gap-4">
+        <ProfileImage w="max-w-xs" />
+        <ProfileName text="text-7xl" class="self-end" />
+        <div class="flex gap-4 h-min">
+          <A href="/blog/1" variant="primary">블로그</A>
+          <A href="/portfolio" variant="secondary">포트폴리오</A>
+        </div>
+      </Panel>
+      <Panel class="flex flex-col gap-4">
+        <p>최신 글</p>
+      </Panel>
+    </div>
+  </main>
+</Layout>
+
+<style></style>

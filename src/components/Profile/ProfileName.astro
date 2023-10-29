@@ -1,0 +1,10 @@
+---
+interface Props {
+  class?: string;
+  text?: string;
+}
+
+const { text } = Astro.props;
+---
+
+<p transition:name="profile_name" class:list={['font-bold text-slate-800', text ?? 'text-4xl', Astro.props.class]}>MOKA-AYUMU</p>

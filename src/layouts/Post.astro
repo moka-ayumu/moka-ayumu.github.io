@@ -1,0 +1,25 @@
+---
+import dayjs from 'dayjs';
+import Giscus from '../components/Giscus.astro';
+import type { PostProps } from '../pages/blog/[...slug].astro';
+import Page from './Page.astro';
+type Props = PostProps;
+
+const { entry } = Astro.props;
+
+const { Content, remarkPluginFrontmatter } = await entry.render();
+
+const lastModified = dayjs(remarkPluginFrontmatter.lastModified).format('YYYY-MM-DD');
+---
+
+<Page title={entry.data.title} titleTransitionName={`${entry.slug}-title`}>
+  <div slot="header_tail">
+    <p>{entry.data.short}</p>
+    <p class="text-sm text-right">{lastModified}</p>
+    <p class="text-sm text-right">약 {remarkPluginFrontmatter.readingTime.minutes}분</p>
+  </div>
+  <div class="prose">
+    <Content />
+  </div>
+  <Giscus />
+</Page>

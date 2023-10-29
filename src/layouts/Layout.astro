@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+import { ViewTransitions } from 'astro:transitions';
+import 'overlayscrollbars/overlayscrollbars.css';
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="MOKA-AYUMU" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <ViewTransitions />
+    <title>{title}</title>
+    <script>
+      import 'giscus';
+    </script>
+  </head>
+  <body class="h-screen overflow-hidden">
+    <div class="h-full">
+      <slot />
+    </div>
+    <style is:global>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');
+
+      html {
+        font-family: 'IBM Plex Sans KR', sans-serif;
+        background: linear-gradient(to bottom right, #3a61b5, #e48ec3);
+        background-size: cover;
+      }
+
+      code {
+        font-family:
+          Menlo,
+          Monaco,
+          Lucida Console,
+          Liberation Mono,
+          DejaVu Sans Mono,
+          Bitstream Vera Sans Mono,
+          Courier New,
+          monospace;
+      }
+
+      p > code {
+        @apply bg-[#282c34] !text-[#abb2bf] !p-2 !rounded-lg shadow mx-1;
+      }
+
+      .astro-code {
+        @apply shadow-lg text-sm p-3 rounded-xl my-2;
+      }
+    </style>
+  </body>
+</html>

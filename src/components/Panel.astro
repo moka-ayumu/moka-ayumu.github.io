@@ -1,0 +1,15 @@
+---
+interface Props {
+  class?: string;
+  p?: string;
+}
+
+const { p } = Astro.props;
+
+const panelClass = 'bg-slate-500 bg-opacity-30 rounded-xl backdrop-blur-md shadow-xl';
+const pClass = p ?? 'p-6';
+---
+
+<div class:list={[panelClass, Astro.props.class, pClass]}>
+  <slot />
+</div>

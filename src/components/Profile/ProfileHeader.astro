@@ -1,0 +1,10 @@
+---
+import SimpleIcon from '../SimpleIcon.astro';
+---
+
+<div class="flex items-center gap-2">
+  <a href="/" class="font-bold text-xl">MOKA-AYUMU</a>
+  <SimpleIcon key="github" size={20} href="https://github.com/moka-ayumu" />
+  <div class="flex-1"></div>
+  <slot name="tail" />
+</div>

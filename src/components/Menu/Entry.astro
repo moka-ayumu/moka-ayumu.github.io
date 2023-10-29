@@ -1,0 +1,34 @@
+---
+import { parseSlug, type Entry } from '../../util/entries';
+interface Props {
+  entry: Entry;
+  base: string;
+}
+
+const { entry, base } = Astro.props;
+const { slug } = Astro.params;
+const nowPath = `/${slug}`;
+---
+
+{
+  Object.entries(entry.entries).map(([nextSlug, entry]) => {
+    const path = `${base}/${nextSlug}`;
+
+    return (
+      <li>
+        {Object.keys(entry.entries).length > 0 ? (
+          <details open>
+            <summary>{slug}</summary>
+            <ul>
+              <Astro.self {entry} slug={path} />
+            </ul>
+          </details>
+        ) : (
+          <a class:list={{ active: nowPath.startsWith(path) }} href={`/blog${path}/1`}>
+            {parseSlug(nextSlug)}
+          </a>
+        )}
+      </li>
+    );
+  })
+}

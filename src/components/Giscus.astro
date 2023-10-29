@@ -1,0 +1,34 @@
+<script>
+  function handleMessage(event: MessageEvent) {
+    if (event.origin !== 'https://giscus.app') return;
+    if (!(typeof event.data === 'object' && event.data.giscus)) return;
+
+    const giscusData = event.data.giscus;
+    if ('resizeHeight' in giscusData) {
+      const giscusWidget = document.getElementById('comments');
+      if (giscusWidget) giscusWidget.style.height = `${giscusData.resizeHeight}px`;
+    }
+  }
+
+  window.addEventListener('message', handleMessage);
+</script>
+
+<giscus-widget
+  id="comments"
+  repo="moka-ayumu/moka-ayumu.github.io"
+  repoid="R_kgDOKmbqaA"
+  category="Blog"
+  categoryid="DIC_kwDOKmbqaM4Cahe2"
+  mapping="pathname"
+  reactionsenabled="1"
+  emitmetadata="0"
+  inputposition="top"
+  theme={`${Astro.url.origin}/giscus-theme.css`}
+  lang="ko"
+  loading="lazy"></giscus-widget>
+
+<style>
+  #comments::part(iframe) {
+    height: 100%;
+  }
+</style>

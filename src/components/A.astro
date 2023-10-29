@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string;
+  variant: 'primary' | 'secondary';
+}
+
+const { href, variant } = Astro.props;
+
+const baseClass = 'px-4 py-2 rounded-xl font-medium min-w-[130px] transition-all font-extralight';
+const bgColor = variant === 'primary' ? 'bg-rose-500 bg-opacity-70' : 'bg-gray-200 bg-opacity-70';
+const textClass = variant === 'primary' ? 'text-slate-300 text-xl' : 'text-slate-500 text-xl';
+const hoverClass = 'hover:bg-opacity-60 hover:translate-x-1';
+
+const mergeClass = `${baseClass} ${bgColor} ${textClass} ${hoverClass}`;
+---
+
+<a {href} class={mergeClass}>
+  <slot />
+</a>

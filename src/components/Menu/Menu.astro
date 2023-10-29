@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Entry from '../Menu/Entry.astro';
+import Panel from '../Panel.astro';
+import type { Entry as IEntry } from '../../util/entries';
+
+const blogEntries = (await getCollection('blog')).reduce(
+  (acc, entry) => {
+    const route = entry.slug.split('/').slice(0, -1);
+    let target = acc;
+    route.forEach((r) => {
+      if (!Object.hasOwn(target.entries, r)) target.entries[r] = { count: 0, entries: {} };
+      target = target.entries[r];
+    });
+    target.count++;
+    return acc;
+  },
+  { count: 0, entries: {} } as IEntry
+);
+
+const { slug } = Astro.params;
+---
+
+<Panel class="grid grid-cols-[auto_1fr] gap-4" p="p-2">
+  <ul class="menu text-lg">
+    <li>
+      <details open>
+        <summary>게시판</summary>
+        <ul>
+          <li>
+            <a class:list={{ active: !isNaN(Number(slug)) }} href="/blog/1">전체</a>
+          </li>
+          <Entry entry={blogEntries} base="" />
+        </ul>
+      </details>
+    </li>
+  </ul>
+</Panel>

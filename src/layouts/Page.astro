@@ -1,0 +1,57 @@
+---
+import Layout from './Layout.astro';
+import Panel from '../components/Panel.astro';
+import Profile from '../components/Profile/Profile.astro';
+import Header from '../components/Header.astro';
+import Menu from '../components/Menu/Menu.astro';
+
+interface Props {
+  title: string;
+  titleTransitionName?: string;
+}
+
+const { title, titleTransitionName } = Astro.props;
+---
+
+<script>
+  import { OverlayScrollbars } from 'overlayscrollbars';
+
+  function init() {
+    let originalScroll: OverlayScrollbars | undefined = undefined;
+    const fn = () => {
+      if (window.location.pathname === '/') {
+        return;
+      }
+      const mainDom = document.querySelector('main');
+      if (originalScroll) originalScroll.destroy();
+      if (mainDom) originalScroll = OverlayScrollbars(mainDom, {});
+    };
+    return fn;
+  }
+
+  init()();
+  document.addEventListener('astro:after-swap', init());
+</script>
+
+<Layout {title}>
+  <div class="h-full flex flex-col relative">
+    <Header />
+    <div class="flex m-auto gap-8 min-w-fit w-full max-w-7xl h-full md:h-5/6 px-2">
+      <div class="flex-col gap-4 hidden md:flex">
+        <Profile />
+        <Menu />
+      </div>
+      <main class="flex-1">
+        <div class="flex flex-col gap-4 h-full">
+          <Panel>
+            <p class="font-bold text-4xl" transition:name={titleTransitionName}>{title}</p>
+            <slot name="header_tail" />
+          </Panel>
+          <Panel class="flex flex-col flex-1">
+            <slot />
+          </Panel>
+        </div>
+      </main>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  size?: number;
+  key: string;
+  href?: string;
+}
+
+const { size = 32, key, href } = Astro.props;
+---
+
+{
+  href ? (
+    <a {href}>
+      <img height={size} width={size} src={`https://unpkg.com/simple-icons@v9/icons/${key}.svg`} />
+    </a>
+  ) : (
+    <img height={size} width={size} src={`https://unpkg.com/simple-icons@v9/icons/${key}.svg`} />
+  )
+}

@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import profileImage from '../../assets/MOKA-AYUMU.png';
+
+interface Props {
+  w?: string;
+}
+
+const { w } = Astro.props;
+---
+
+<Image
+  transition:name="profile_image"
+  class:list={['row-span-2 mask mask-squircle', w ?? 'max-w-[18rem]']}
+  src="https://avatars.githubusercontent.com/u/10963468"
+  width="460"
+  height="460"
+  alt="profile"
+/>
