@@ -15,9 +15,9 @@ export function sortCategories(collection: Awaited<ReturnType<typeof getCollecti
       res[slug].push(entry);
     });
   });
-  Object.values(res).forEach((entries) => {
-    entries.sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
-  });
+  // Object.values(res).forEach((entries) => {
+  //   entries.sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+  // });
   return res;
 }
 
@@ -29,6 +29,15 @@ export function parseSlug(slug: string) {
 
       case 'devops':
         return 'DevOps';
+
+      case 'database':
+        return 'DB';
+
+      case 'elixir':
+        return 'Elixir';
+
+      case 'typescript':
+        return 'Typescript';
 
       default:
         return '';
