@@ -1,6 +1,6 @@
 ---
 title: 'Lexical 패키지를 사용한 태그 기능 구현'
-short: 'Lexical 패키지를 사용한 태그 기능 구현'
+short: ''
 ---
 
 해당 라이브러리는 문서가 자세히 없고 대부분 React를 사용하는데 초점이 잡혀져 있었다. 그래서 Svelte를 사용하는 프로젝트에서 사용하기 위해 사실상 바닐라 JS로 Svelte에 구현하였다.
@@ -97,7 +97,6 @@ export default class RecommendNode extends TextNode {
 그리고 이 노드를 사용하기 위해 아까 전의 config에 추가한다.
 
 ```ts
-
     // Editor.svelte
     import RecommendNode from 'Recommend';
     const config = {
@@ -106,14 +105,12 @@ export default class RecommendNode extends TextNode {
         error: console.error,
         nodes: [LineBreakNode, ParagraphNode, TextNode, RecommendNode]
     };
-
 ```
 
 이제 # 등의 해시태그 시작 기호에 반응하기 위해 에디터에 이벤트를 추가하여야 한다.
 편의와 재사용성를 위해 기존 에디터 코드가 아닌 새로운 Svelte 컴포넌트를 만든다.
 
 ```svelte
-
 <!-- Recommend.svelte -->
 <script lang="ts">
     import { onMount } from 'svelte';
@@ -180,7 +177,6 @@ export default class RecommendNode extends TextNode {
         }
     }
 </script>
-
 ```
 
 새롭게 만든 컴포넌트를 기존의 에디터가 있는 곳에 추가해준다.

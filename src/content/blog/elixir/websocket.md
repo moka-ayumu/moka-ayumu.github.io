@@ -53,7 +53,6 @@ keys에 원하는 키 설정과 name에 추후에 사용할 이름을 입력하�
 각 프로세스를 통신할 때는 Process.send로 보내고, 이때 같이 보내진 값은 websocket_info 함수에서 Info로서 들어오게 된다.
 
 ```elixir
-
 defmodule Backend.SocketHandler do
   @behaviour :cowboy_websocket
 
@@ -73,7 +72,6 @@ defmodule Backend.SocketHandler do
     {:reply, {:text, value}, state} # CallResult
   end
 end
-
 ```
 
 ## 라우터 구성
@@ -89,8 +87,8 @@ use Plug.Router
 
     get "/" do
         # 핸드쉐이크
-        {Plug.Cowboy.Conn, req} # conn.adapter # 1. Plug의 conn으로부터 HTML 요청을 읽는다.
-        {:cowboy_websocket, _, state} # Backend.SocketHandler.init(req, {}) # 2. cowboy_websocket으로 구성된 모듈의 init 함수를 통하여 state을 계산한다.
+        {Plug.Cowboy.Conn, req} = conn.adapter # 1. Plug의 conn으로부터 HTML 요청을 읽는다.
+        {:cowboy_websocket, _, state} = Backend.SocketHandler.init(req, {}) # 2. cowboy_websocket으로 구성된 모듈의 init 함수를 통하여 state을 계산한다.
         Plug.Conn.upgrade_adapter(conn, :websocket, {Backend.SocketHandler, state, %{}}) # 3. Plug.Conn.upgrade_adater를 통하여 프로토콜을 업그레이드 한다.
     end
 end
