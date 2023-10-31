@@ -1,13 +1,19 @@
 import type { getCollection } from 'astro:content';
+import dayjs from 'dayjs';
 
 export interface Entry {
   entries: { [key: string]: Entry };
   count: number;
 }
 
-export function sortCategories(collection: Awaited<ReturnType<typeof getCollection>>) {
+export async function sortCategories(collection: Awaited<ReturnType<typeof getCollection>>) {
+  const blogEntriesWithRender = await Promise.all(
+    collection.map(async (entry) => ({ ...entry, lastModified: dayjs((await entry.render()).remarkPluginFrontmatter.lastModified).valueOf() }))
+  );
+  blogEntriesWithRender.sort((a, b) => b.lastModified - a.lastModified);
+
   const res: { [key: string]: Awaited<ReturnType<typeof getCollection>> } = {};
-  collection.forEach((entry) => {
+  blogEntriesWithRender.forEach((entry) => {
     const slashSlug = entry.slug.split('/');
     const slugs = [''].concat(slashSlug.slice(0, -1));
     slugs.forEach((slug) => {
@@ -15,9 +21,7 @@ export function sortCategories(collection: Awaited<ReturnType<typeof getCollecti
       res[slug].push(entry);
     });
   });
-  // Object.values(res).forEach((entries) => {
-  //   entries.sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
-  // });
+
   return res;
 }
 

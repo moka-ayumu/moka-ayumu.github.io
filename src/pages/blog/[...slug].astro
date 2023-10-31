@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import Page from '../../layouts/Page.astro';
 import { sortCategories } from '../../util/entries';
 import Post from '../../layouts/Post.astro';
 import Category from '../../layouts/Category.astro';
@@ -12,7 +11,7 @@ type StaticPath = {
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
-  const categories = sortCategories(blogEntries);
+  const categories = await sortCategories(blogEntries);
   const limit = 6;
 
   const paths = blogEntries.map((entry) => ({
