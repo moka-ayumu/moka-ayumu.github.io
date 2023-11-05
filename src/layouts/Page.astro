@@ -17,14 +17,15 @@ const { title, titleTransitionName } = Astro.props;
   import { OverlayScrollbars } from 'overlayscrollbars';
 
   function init() {
-    let originalScroll: OverlayScrollbars | undefined = undefined;
+    let originalScrolls: OverlayScrollbars[] = [];
     const fn = () => {
       if (window.location.pathname === '/') {
         return;
       }
       const mainDom = document.querySelector('main');
-      if (originalScroll) originalScroll.destroy();
-      if (mainDom) originalScroll = OverlayScrollbars(mainDom, {});
+      const doms = Array.from(document.getElementsByTagName('code')).concat(mainDom ? mainDom : []);
+      originalScrolls.forEach((scroll) => scroll.destroy());
+      originalScrolls = doms.map((dom) => OverlayScrollbars(dom, {}));
     };
     return fn;
   }
