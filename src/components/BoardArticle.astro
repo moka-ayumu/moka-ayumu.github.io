@@ -1,0 +1,17 @@
+---
+import dayjs from 'dayjs';
+import { parseSlug, type RenderedCollection } from '../util/entries';
+
+type Props = {
+  post: RenderedCollection[number];
+};
+
+const { post } = Astro.props;
+---
+
+<a href={`/blog/${post.slug}`} class="flex gap-2 transition-colors hover:bg-white hover:bg-opacity-20 px-1.5 py-0.5 rounded">
+  <p class="font-bold">{parseSlug(post.slug)}</p>
+  <p class="truncate">{post.data.title}</p>
+  <div class="flex-1"></div>
+  <p class="whitespace-nowrap">{dayjs(post.render.remarkPluginFrontmatter.lastModified).format('YYYY-MM-DD')}</p>
+</a>

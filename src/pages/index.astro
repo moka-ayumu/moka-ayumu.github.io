@@ -4,11 +4,20 @@ import A from '../components/A.astro';
 import Panel from '../components/Panel.astro';
 import ProfileImage from '../components/Profile/ProfileImage.astro';
 import ProfileName from '../components/Profile/ProfileName.astro';
+import { getCollection } from 'astro:content';
+import { parseSlug, entreisRender, sortCategories } from '../util/entries';
+import dayjs from 'dayjs';
+import BoardArticle from '../components/BoardArticle.astro';
+
+const blogEntries = await getCollection('blog');
+const categories = await sortCategories(blogEntries);
+const recentPosts = categories[''].slice(0, 5);
+const recentPostsWithRender = await entreisRender(recentPosts);
 ---
 
 <Layout title="MOKA-AYUMU">
   <main class="h-full flex">
-    <div class="flex flex-col m-auto gap-8">
+    <div class="flex flex-col m-auto gap-8 max-w-4xl w-full">
       <Panel class="grid grid-cols-[auto_1fr] gap-4">
         <ProfileImage w="max-w-xs" />
         <ProfileName text="text-7xl" class="self-end" />
@@ -18,7 +27,10 @@ import ProfileName from '../components/Profile/ProfileName.astro';
         </div>
       </Panel>
       <Panel class="flex flex-col gap-4">
-        <p>최신 글</p>
+        <p class="text-xl font-bold">최신 글</p>
+        <div class="flex flex-col gap-2">
+          {recentPostsWithRender.map((post) => <BoardArticle {post} />)}
+        </div>
       </Panel>
     </div>
   </main>

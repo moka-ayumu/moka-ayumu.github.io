@@ -1,20 +1,13 @@
 ---
 import type { CategoryProps } from '../pages/blog/[...slug].astro';
-import { parseSlug } from '../util/entries';
+import { entreisRender, parseSlug } from '../util/entries';
 import Page from './Page.astro';
 type Props = CategoryProps;
 import dayjs from 'dayjs';
 
 const { slug, entries, pageLength, pageIndex } = Astro.props;
-
 const title = parseSlug(slug);
-
-const entriesWithRender = await Promise.all(
-  entries.map(async (entry) => ({
-    ...entry,
-    render: await entry.render(),
-  }))
-);
+const entriesWithRender = await entreisRender(entries);
 ---
 
 <Page title={title.join('/')}>

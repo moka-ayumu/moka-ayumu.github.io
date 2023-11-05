@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { sortCategories } from '../../util/entries';
+import { sortCategories, type Collection } from '../../util/entries';
 import Post from '../../layouts/Post.astro';
 import Category from '../../layouts/Category.astro';
 
@@ -37,7 +37,7 @@ export async function getStaticPaths() {
   return paths.concat(categoryPaths);
 }
 
-type Entry = Awaited<ReturnType<typeof getCollection>>[number];
+type Entry = Collection[number];
 export type PostProps = { type: 'post'; entry: Entry };
 export type CategoryProps = { type: 'category'; slug: string; entries: Entry[]; pageLength: number; pageIndex: number };
 type Props = PostProps | CategoryProps;
