@@ -38,7 +38,7 @@ const { title, titleTransitionName } = Astro.props;
   <div class="h-full flex flex-col relative">
     <Header />
     <div class="flex m-auto gap-8 min-w-fit w-full max-w-7xl h-full md:h-5/6 px-2">
-      <div class="flex-col gap-4 hidden md:flex">
+      <div class="flex-col gap-4 hidden md:flex" transition:name="sidebar">
         <Profile />
         <Menu />
       </div>
