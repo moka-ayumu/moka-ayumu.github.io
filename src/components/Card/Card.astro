@@ -1,0 +1,17 @@
+---
+type Props = {
+  image?: string;
+  href?: string;
+  title?: string;
+};
+
+const { image, href, title } = Astro.props;
+---
+
+<a class={`bg-slate-100 bg-opacity-40 rounded-lg flex overflow-hidden min-h-[16rem] transition-all hover:bg-opacity-60 ${href ? '' : 'cursor-default'}`} {href}>
+  {image && <img src={image} alt="" class="max-w-xs w-full object-contain flex-shrink-0" />}
+  <div class="px-3 py-2 break-all flex flex-col gap-1">
+    {title && <p class="font-bold text-3xl">{title}</p>}
+    <slot />
+  </div>
+</a>

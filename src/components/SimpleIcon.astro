@@ -11,9 +11,9 @@ const { size = 32, key, href } = Astro.props;
 {
   href ? (
     <a {href}>
-      <img height={size} width={size} src={`https://unpkg.com/simple-icons@v9/icons/${key}.svg`} />
+      <img height={size} width={size} src={`https://cdn.simpleicons.org/${key}`} />
     </a>
   ) : (
-    <img height={size} width={size} src={`https://unpkg.com/simple-icons@v9/icons/${key}.svg`} />
+    <img height={size} width={size} src={`https://cdn.simpleicons.org/${key}`} />
   )
 }

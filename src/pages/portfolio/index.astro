@@ -1,7 +1,32 @@
 ---
+import Card from '../../components/Card/Card.astro';
+import SimpleIcon from '../../components/SimpleIcon.astro';
+import SimpleIconList from '../../components/SimpleIconList.astro';
 import Page from '../../layouts/Page.astro';
 ---
 
 <Page title="포트폴리오">
-  <p>포트폴리오</p>
+  <div class="flex flex-col gap-2 max-w-6xl">
+    <Card title="MOKA STATION" image="https://raw.githubusercontent.com/moka-station/frontend/main/readme/example.png" href="https://github.com/orgs/moka-station/repositories">
+      <SimpleIconList keys={['svelte', 'elixir', 'cloudflare', 'typescript', 'amazons3', 'planetscale']} size={20} />
+      <p class="mt-1">트위터와 비슷한 SNS 구현을 목표로 한 프로젝트</p>
+      <p>구현된 기능: 글 작성(멘션, 해시태그, 이미지, 좋아요, 인용), 프로필 변경, 채팅, 알림, 팔로우 등</p>
+    </Card>
+    <Card title="OwnChar" image="https://raw.githubusercontent.com/moka-ayumu/OwnChar/main/readme/example.png" href="https://github.com/moka-ayumu/OwnChar">
+      <SimpleIconList keys={['svelte', 'typescript', 'sass']} size={20} />
+      <p class="mt-1">
+        사용자가 사이트에서 pdf 혹은 jpg 파일(상단 우측 사진)을 받아 인쇄 또는 페인팅 프로그램 등으로 페이지위에 해당 문자에 알맞은 글자를 쓴 뒤 그 파일을 업로드하면 그 글자들을
+        폰트로 바꾸어 주는 사이트
+      </p>
+      <p>
+        각 페이지에는 좌측상단에 QR코드를 넣어 현재 페이지가 어떠한 문자들을 담고 있는지 확인하여 감지, 글자가 있을 경우 해당 글자를 이미지를 벡터 형식으로 감지한 다음 일부 처리를
+        통하여 폰트 파일에 추가함
+      </p>
+    </Card>
+    <Card title="Elegaudio" href="https://github.com/moka-ayumu/elegaudio">
+      <SimpleIconList keys={['react', 'typescript', 'githubactions']} size={20} />
+      <p class="mt-1">소리를 시각화하여 재생 현황과 함께 보여주는 라이브러리</p>
+      <p>Canvas를 이용하여 구현하였고 Github Actions를 통하여 자동으로 페이지와 npm게시</p>
+    </Card>
+  </div>
 </Page>

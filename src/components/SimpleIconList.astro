@@ -1,0 +1,22 @@
+---
+import SimpleIcon from './SimpleIcon.astro';
+interface Props {
+  size?: number;
+  keys: string[];
+}
+
+const { size = 32, keys } = Astro.props;
+---
+
+<div class="flex gap-4 whitespace-nowrap flex-wrap items-center bg-white bg-opacity-30 rounded w-fit px-2 py-1">
+  {
+    keys.map((key) => (
+      <div class="flex gap-1 items-center">
+        <>
+          <SimpleIcon {key} {size} />
+          <p>{key}</p>
+        </>
+      </div>
+    ))
+  }
+</div>
